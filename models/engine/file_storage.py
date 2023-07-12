@@ -7,15 +7,15 @@ import json
 import models
 from models.amenity import Amenity
 from models.base_model import BaseModel
-from models.city import City
-from models.place import Place
+from models.location import Location
+from models.lodge import Lodge
 from models.review import Review
-from models.state import State
+from models.street import Street
 from models.user import User
 from hashlib import md5
 
-classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
-           "Place": Place, "Review": Review, "State": State, "User": User}
+classes = {"Amenity": Amenity, "BaseModel": BaseModel, "Street": Street,
+           "Lodge": Lodge, "Review": Review, "Location": Location, "User": User}
 
 
 class FileStorage:
