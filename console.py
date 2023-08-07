@@ -19,7 +19,7 @@ classes = {"Amenity": Amenity, "BaseModel": BaseModel, "Street": Street,
 
 class ResiXpressCommand(cmd.Cmd):
     """ ResidenceXpress console """
-    prompt = '(hbnb) '
+    prompt = '(RXpress) '
 
     def do_EOF(self, arg):
         """Exits console"""
