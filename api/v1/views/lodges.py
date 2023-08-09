@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" objects that handle all default RestFul API actions for Places """
+""" objects that handle all default RestFul API actions for Lodges """
 from models.location import Location
 from models.street import Street
 from models.lodge import Lodge
