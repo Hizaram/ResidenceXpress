@@ -8,7 +8,7 @@ from sqlalchemy import Column, String, Integer, Float, ForeignKey, Table
 from sqlalchemy.orm import relationship
 
 if models.storage_t == 'db':
-    place_amenity = Table('lodge_amenity', Base.metadata,
+    lodge_amenity = Table('lodge_amenity', Base.metadata,
                           Column('lodge_id', String(60),
                                  ForeignKey('lodges.id', onupdate='CASCADE',
                                             ondelete='CASCADE'),
@@ -30,10 +30,10 @@ class Lodge(BaseModel, Base):
         number_rooms = Column(Integer, nullable=False, default=0)
         price = Column(Integer, nullable=False, default=0)
         reviews = relationship("Review",
-                               backref="place",
+                               backref="lodge",
                                cascade="all, delete, delete-orphan")
         amenities = relationship("Amenity",
-                                 secondary=place_amenity,
+                                 secondary=lodge_amenity,
                                  viewonly=False)
     else:
         street_id = ""
