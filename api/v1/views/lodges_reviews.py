@@ -18,7 +18,7 @@ def get_reviews(lodge_id):
     """
     lodge = storage.get(Lodge, lodge_id)
 
-    if not place:
+    if not lodge:
         abort(404)
 
     reviews = [review.to_dict() for review in place.reviews]
@@ -67,7 +67,7 @@ def post_review(lodge_id):
     """
     lodge = storage.get(Lodge, lodge_id)
 
-    if not place:
+    if not lodge:
         abort(404)
 
     if not request.get_json():
