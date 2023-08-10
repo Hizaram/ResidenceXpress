@@ -20,9 +20,9 @@ def get_locations():
     return jsonify(list_locations)
 
 
-@app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
-@swag_from('documentation/state/get_id_state.yml', methods=['get'])
-def get_state(state_id):
+@app_views.route('/locations/<location_id>', methods=['GET'], strict_slashes=False)
+@swag_from('documentation/location/get_id_location.yml', methods=['get'])
+def get_location(location_id):
     """ Retrieves a specific Location """
     location = storage.get(Location, location_id)
     if not location:
@@ -33,15 +33,15 @@ def get_state(state_id):
 
 @app_views.route('/locations/<location_id>', methods=['DELETE'],
                  strict_slashes=False)
-@swag_from('documentation/state/delete_location.yml', methods=['DELETE'])
+@swag_from('documentation/location/delete_location.yml', methods=['DELETE'])
 def delete_location(location_id):
     """
     Deletes a Location Object
     """
 
-    state = storage.get(Location, location_id)
+    location = storage.get(Location, location_id)
 
-    if not state:
+    if not location:
         abort(404)
 
     storage.delete(location)
@@ -87,6 +87,6 @@ def put_location(location_id):
     data = request.get_json()
     for key, value in data.items():
         if key not in ignore:
-            setattr(state, key, value)
+            setattr(location, key, value)
     storage.save()
     return make_response(jsonify(location.to_dict()), 200)
