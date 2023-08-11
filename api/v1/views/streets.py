@@ -83,7 +83,7 @@ def put_street(street_id):
     Updates a Street
     """
     street = storage.get(Street, street_id)
-    if not city:
+    if not street:
         abort(404)
 
     if not request.get_json():
