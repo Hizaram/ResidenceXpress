@@ -6,6 +6,7 @@ from models.location import Location
 from models.street import Street
 from models.amenity import Amenity
 from models.lodge import Lodge
+from models.user import User
 from os import environ
 from flask import Flask, render_template
 import requests
@@ -22,6 +23,35 @@ def get_lodge_details(lodge_id):
     if response.status_code == 200:
         return response.json()
     return None
+
+def get_user_details(user_id):
+    """Gets the user details"""
+    api_url = "http://127.0.0.1:5000/api/v1/users/{}".format(user_id)
+    response = requests.get(api_url)
+
+    if response.status_code == 200:
+        return response.json()
+    return None
+
+def get_street_details(street_id):
+    """Gets the street details"""
+    api_url = "http://127.0.0.1:5000/api/v1/streets/{}".format(street_id)
+    response = requests.get(api_url)
+
+    if response.status_code == 200:
+        return response.json()
+    return None
+
+def get_location_details(location_id):
+    """Gets the location details"""
+    api_url = "http://127.0.0.1:5000/api/v1/locations/{}".format(location_id)
+    response = requests.get(api_url)
+
+    if response.status_code == 200:
+        return response.json()
+    return None
+
+
 
 @app.teardown_appcontext
 def close_db(error):
@@ -59,9 +89,20 @@ def resixpress():
 def view_lodge(lodge_id):
     """Gets and renders the lodge details page"""
     lodge_details = get_lodge_details(lodge_id)
+    user_id = lodge_details["user_id"]
+    street_id = lodge_details["street_id"]
+
+    user_details = get_user_details(user_id)
+
+    street_details = get_street_details(street_id)
+    location_id = street_details["location_id"]
+    location_details = get_location_details(location_id)
 
     if lodge_details:
         return render_template('view_lodge.html',
+                                user=user_details,
+                                street=street_details,
+                                location=location_details,
                                 lodge=lodge_details)
 
     return
@@ -69,4 +110,4 @@ def view_lodge(lodge_id):
 
 if __name__ == "__main__":
     """ Main Function """
-    app.run(host='0.0.0.0', port=5001)
+    app.run(host='0.0.0.0', port=5001, debug=True)
