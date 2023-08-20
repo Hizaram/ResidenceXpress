@@ -107,6 +107,16 @@ def view_lodge(lodge_id):
 
     return
 
+@app.route('/view_user/<user_id>', strict_slashes=False)
+def view_user(user_id):
+    """Gets and renders the user details page"""
+    user_details = get_user_details(user_id)
+
+    if user_details:
+        return render_template('view_user.html',
+                                user=user_details)
+    return
+
 
 if __name__ == "__main__":
     """ Main Function """
