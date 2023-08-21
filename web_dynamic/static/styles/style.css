@@ -481,6 +481,10 @@ button, a { transition: var(--transition); }
   margin-bottom: 30px;
 }
 
+.hero .btn {
+  max-width: max-content;
+  --text-transform: uppercase;
+}
 
 
 
